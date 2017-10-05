@@ -91,7 +91,7 @@ or an email to the public group transitfeed@googlegroups.com. Sorry!
       for local_name, local_val in frame_obj.f_locals.items():
         try:
           truncated_val = str(local_val)[0:500]
-        except Exception, e:
+        except Exception as e:
           dump.append('    Exception in str(%s): %s' % (local_name, e))
         else:
           if len(truncated_val) >= 500:
