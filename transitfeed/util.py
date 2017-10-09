@@ -556,7 +556,7 @@ class CsvUnicodeWriter:
         encoded_row.append(s)
     try:
       self.writer.writerow(encoded_row)
-    except Exception, e:
+    except Exception as e:
       print 'error writing %s as %s' % (row, encoded_row)
       raise e
 
