@@ -14,6 +14,7 @@
 
 # Unit tests for the stop module.
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 from tests import util
 import transitfeed
@@ -112,7 +113,7 @@ class StopHierarchyTestCase(util.MemoryZipTestCase):
     schedule = self.MakeLoaderAndLoad()
     e = self.accumulator.PopException("InvalidValue")
     self.assertEquals("parent_station", e.column_name)
-    self.assertTrue(e.FormatProblem().find("location_type=1") != -1)
+    self.assertIn("location_type=1", e.FormatProblem())
     e = self.accumulator.PopException("InvalidValue")
     self.assertEquals("location_type", e.column_name)
     self.accumulator.AssertNoMoreExceptions()
@@ -178,14 +179,18 @@ class StopHierarchyTestCase(util.MemoryZipTestCase):
     schedule = self.MakeLoaderAndLoad()
     e = self.accumulator.PopException("StopTooFarFromParentStation")
     self.assertEqual(0, e.type)  # Error
-    self.assertTrue(e.FormatProblem().find(
-        "Stagecoach (ID STAGECOACH) is too far from its parent"
-        " station Bullfrog (ID BULLFROG_ST)") != -1)
+    self.assertIn(
+      "Stagecoach (ID STAGECOACH) is too far from its parent" \
+      " station Bullfrog (ID BULLFROG_ST)",
+      e.FormatProblem()
+    )
     e = self.accumulator.PopException("StopTooFarFromParentStation")
     self.assertEqual(1, e.type)  # Warning
-    self.assertTrue(e.FormatProblem().find(
-        "Bullfrog (ID BULLFROG) is too far from its parent"
-        " station Bullfrog (ID BULLFROG_ST)") != -1)
+    self.assertIn(
+      "Bullfrog (ID BULLFROG) is too far from its parent" \
+      " station Bullfrog (ID BULLFROG_ST)",
+      e.FormatProblem()
+    )
     self.accumulator.AssertNoMoreExceptions()
 
   def testStopTimeZone(self):
@@ -197,7 +202,7 @@ class StopHierarchyTestCase(util.MemoryZipTestCase):
         "America/New_York\n"
         "STATION,Airport,36.868446,-116.784582,1,,\n"
         "BULLFROG,Bullfrog,36.88108,-116.81797,,,\n"
-        "STAGECOACH,Stagecoach Hotel,36.915682,-116.751677,,,\n")    
+        "STAGECOACH,Stagecoach Hotel,36.915682,-116.751677,,,\n")
     self.MakeLoaderAndLoad()
     e = self.accumulator.PopException("InvalidValue")
     self.assertEqual(1, e.type)  # Warning
@@ -425,7 +430,7 @@ class StopValidationTestCase(util.ValidationTestCase):
     self.ValidateAndExpectInvalidValue(stop, 'stop_desc')
     stop.stop_desc = 'Edge of the Couch'
     self.accumulator.AssertNoMoreExceptions()
-    
+
     stop.stop_timezone = 'This_Timezone/Does_Not_Exist'
     self.ValidateAndExpectInvalidValue(stop, 'stop_timezone')
     stop.stop_timezone = 'America/Los_Angeles'

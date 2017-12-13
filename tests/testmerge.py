@@ -780,7 +780,7 @@ class TestStopMerger(util.TestCase):
       self.fm.MergeSchedules()
       self.fail("Expecting MergeError")
     except merge.SameIdButNotMerged as merge_error:
-      self.assertTrue(("%s" % merge_error).find("location_type") != -1)
+      self.assertIn("location_type", "%s" % merge_error)
 
   def AssertS1ParentIsS2(self):
     """Assert that the merged s1 has parent s2."""

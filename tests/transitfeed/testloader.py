@@ -82,7 +82,7 @@ class EndOfLineCheckerTestCase(util.TestCase):
     self.assertEqual(e.bad_line_end, r"\r\r\r\n")
     e = self.accumulator.PopException("OtherProblem")
     self.assertEqual(e.file_name, "<StringIO>")
-    self.assertTrue(e.description.find("consistent line end") != -1)
+    self.assertIn("consistent line end", e.description)
     self.accumulator.AssertNoMoreExceptions()
 
   def testEmbeddedCr(self):
@@ -551,7 +551,7 @@ class CsvDictTestCase(util.TestCase):
                                             ["test_id", "test_name"], [], []))
     self.assertEquals([], results)
     e = self.accumulator.PopException("CsvSyntax")
-    self.assertTrue(e.FormatProblem().find("missing the header") != -1)
+    self.assertIn("missing the header", e.FormatProblem())
     self.accumulator.AssertNoMoreExceptions()
 
   def testFieldWithSpaces(self):
@@ -692,7 +692,7 @@ class CsvDictTestCase(util.TestCase):
                         ["test_id", "test_name"], ["id1", "my name"])],
                       results)
     e = self.accumulator.PopException("OtherProblem")
-    self.assertTrue(e.FormatProblem().find("too many cells") != -1)
+    self.assertIn("too many cells", e.FormatProblem())
     self.accumulator.AssertNoMoreExceptions()
 
   def testMissingComma(self):
@@ -704,7 +704,7 @@ class CsvDictTestCase(util.TestCase):
     self.assertEquals([({"test_id": "id1 my name"}, 2,
                         ["test_id", "test_name"], ["id1 my name"])], results)
     e = self.accumulator.PopException("OtherProblem")
-    self.assertTrue(e.FormatProblem().find("missing cells") != -1)
+    self.assertIn("missing cells", e.FormatProblem())
     self.accumulator.AssertNoMoreExceptions()
 
   def testDetectsDuplicateHeaders(self):

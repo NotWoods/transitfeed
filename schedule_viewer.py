@@ -360,7 +360,7 @@ class ScheduleRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     query = params.get('q', None).lower()
     matches = []
     for s in schedule.GetStopList():
-      if s.stop_id.lower().find(query) != -1 or s.stop_name.lower().find(query) != -1:
+      if query in s.stop_id.lower() or query in s.stop_name.lower():
         matches.append(StopToTuple(s))
     return matches
 

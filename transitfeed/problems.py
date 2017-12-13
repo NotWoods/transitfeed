@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import unicode_literals
 import logging
 import time
 
@@ -698,11 +699,9 @@ class ExpirationDate(ExceptionWithContext):
     formatted_date = time.strftime("%B %d, %Y",
                                    time.localtime(expiration))
     if (expiration < time.mktime(time.localtime())):
-      return "This feed expired on %s (%s)" % (formatted_date,
-                                               expiration_origin_file)
+      return "This feed expired on {} ({})".format(formatted_date, expiration_origin_file)
     else:
-      return "This feed will soon expire, on %s (%s)" % (formatted_date,
-                                                         expiration_origin_file)
+      return "This feed will soon expire, on {} ({})".format(formatted_date, expiration_origin_file)
 
 class FutureService(ExceptionWithContext):
   def FormatProblem(self, d=None):
@@ -743,12 +742,12 @@ class TooFastTravel(ExceptionWithContext):
     if not d:
       d = self.GetDictToFormat()
     if not d['speed']:
-      return "High speed travel detected in trip %(trip_id)s: %(prev_stop)s" \
-                " to %(next_stop)s. %(dist).0f meters in %(time)d seconds." % d
+      return b"High speed travel detected in trip {trip_id}: {prev_stop}" \
+             b" to {next_stop}. {dist} meters in {time} seconds.".format(**d)
     else:
-      return "High speed travel detected in trip %(trip_id)s: %(prev_stop)s" \
-             " to %(next_stop)s. %(dist).0f meters in %(time)d seconds." \
-             " (%(speed).0f km/h)." % d
+      return b"High speed travel detected in trip {trip_id}: {prev_stop}" \
+             b" to {next_stop}. {dist} meters in {time} seconds." \
+             b" ({speed} km/h).".format(**d)
   def __cmp__(self, y):
     # Sort in decreasing order because more distance is more significant. We
     # can't sort by speed because not all TooFastTravel objects have a speed.

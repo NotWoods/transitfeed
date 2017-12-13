@@ -103,7 +103,7 @@ class filter_unused_stops(util.TempDirTestCaseBase):
          '--list_removed',
          unused_stop_path, 'output.zip'])
     # Extra stop was listed on stdout
-    self.assertNotEqual(stdout.find('Bogus Stop'), -1)
+    self.assertIn('Bogus Stop', stdout)
 
     # Make sure unused stop was removed and another stop still exists.
     schedule = transitfeed.Loader(

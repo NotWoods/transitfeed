@@ -340,8 +340,8 @@ class AgencyLangTestCase(ExtensionMemoryZipTestCase):
                            gtfs_factory=self.gtfs_factory)
     e = self.accumulator.PopInvalidValue("agency_lang")
     e_msg = e.FormatProblem()
-    self.assertTrue(e_msg.find('not well-formed') != -1,
-                    '%s should not be well-formed, is: %s' % (e.value, e_msg))
+    self.assertIn('not well-formed', e_msg,
+                  '%s should not be well-formed, is: %s' % (e.value, e_msg))
     self.accumulator.AssertNoMoreExceptions()
 
   def testNotValidAgencyLang(self):
@@ -354,6 +354,6 @@ class AgencyLangTestCase(ExtensionMemoryZipTestCase):
                            gtfs_factory=self.gtfs_factory)
     e = self.accumulator.PopInvalidValue("agency_lang")
     e_msg = e.FormatProblem()
-    self.assertTrue(e_msg.find('not valid') != -1,
-                    '%s should not be valid, is: %s' % (e.value, e_msg))
+    self.assertIn('not valid', e_msg,
+                  '%s should not be valid, is: %s' % (e.value, e_msg))
     self.accumulator.AssertNoMoreExceptions()

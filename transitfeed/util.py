@@ -645,7 +645,7 @@ class EndOfLineChecker:
         (self._name, self._line_number))
     next_line_contents = next_line[0:m_eol.start()]
     for seq, name in INVALID_LINE_SEPARATOR_UTF8.items():
-      if next_line_contents.find(seq) != -1:
+      if seq in next_line_contents:
         self._problems.OtherProblem(
           "Line contains %s" % name,
           context=(self._name, self._line_number))

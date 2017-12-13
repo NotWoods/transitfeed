@@ -1828,7 +1828,7 @@ https://github.com/google/transitfeed/wiki/Merge
   new_feed_path = os.path.abspath(args[1])
   merged_feed_path = os.path.abspath(args[2])
 
-  if old_feed_path.find("IWantMyCrash") != -1:
+  if "IWantMyCrash" in old_feed_path:
     # See tests/testmerge.py
     raise Exception('For testing the merge crash handler.')
 

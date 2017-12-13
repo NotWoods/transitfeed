@@ -233,8 +233,8 @@ class TripSequenceValidationTestCase(util.ValidationTestCase):
     trip._AddStopTimeObjectUnordered(stoptime3, schedule)
     trip.Validate(self.problems)
     e = self.accumulator.PopException('OtherProblem')
-    self.assertTrue(e.FormatProblem().find('Timetravel detected') != -1)
-    self.assertTrue(e.FormatProblem().find('number 2 in trip 054C-00') != -1)
+    self.assertIn('Timetravel detected', e.FormatProblem())
+    self.assertIn('number 2 in trip 054C-00', e.FormatProblem())
     self.accumulator.AssertNoMoreExceptions()
 
 
@@ -296,8 +296,8 @@ class TripHasStopTimeValidationTestCase(util.ValidationTestCase):
     schedule.Validate(self.problems)
     self.accumulator.PopException('OtherProblem')  # pop first warning
     e = self.accumulator.PopException('OtherProblem')  # pop frequency error
-    self.assertTrue(e.FormatProblem().find('Frequencies defined, but') != -1)
-    self.assertTrue(e.FormatProblem().find('given in trip 054C-00') != -1)
+    self.assertIn('Frequencies defined, but', e.FormatProblem())
+    self.assertIn('given in trip 054C-00', e.FormatProblem())
     self.assertEquals(transitfeed.TYPE_ERROR, e.type)
     self.accumulator.AssertNoMoreExceptions()
     trip.ClearFrequencies()
@@ -409,8 +409,8 @@ class StopMatchWithShapeTestCase(util.ValidationTestCase):
 
     schedule.Validate(self.problems)
     e = self.accumulator.PopException('StopTooFarFromShapeWithDistTraveled')
-    self.assertTrue(e.FormatProblem().find('Demo Stop 2') != -1)
-    self.assertTrue(e.FormatProblem().find('1344 meters away') != -1)
+    self.assertIn('Demo Stop 2', e.FormatProblem())
+    self.assertIn('1344 meters away', e.FormatProblem())
     self.accumulator.AssertNoMoreExceptions()
 
 
