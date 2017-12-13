@@ -266,6 +266,9 @@ class ServicePeriod(object):
   def __ne__(self, other):
     return not self.__eq__(other)
 
+  def __hash__(self):
+    return hash(tuple(self.GetCalendarFieldValuesTuple() + self.GetCalendarDatesFieldValuesTuples()))
+
   def ValidateServiceId(self, problems):
     if transitfeed.util.IsEmpty(self.service_id):
       problems.MissingValue('service_id')

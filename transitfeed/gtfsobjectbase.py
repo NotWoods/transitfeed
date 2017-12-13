@@ -80,6 +80,9 @@ class GtfsObjectBase(GtfsFactoryUser):
     if name[0] != '_' and self._schedule:
       self._schedule.AddTableColumn(self.__class__._TABLE_NAME, name)
 
+  def __hash__(self):
+    return hash(tuple(self.keys()))
+
   def __eq__(self, other):
     """Return true iff self and other are equivalent"""
     if not other:
@@ -96,6 +99,26 @@ class GtfsObjectBase(GtfsFactoryUser):
 
   def __ne__(self, other):
     return not self.__eq__(other)
+
+  def __lt__(self, other):
+    if not other:
+      return False
+    return tuple(self.keys()) < tuple(other.keys())
+
+  def __le__(self, other):
+    if not other:
+      return False
+    return tuple(self.keys()) <= tuple(other.keys())
+
+  def __gt__(self, other):
+    if not other:
+      return False
+    return tuple(self.keys()) > tuple(other.keys())
+
+  def __ge__(self, other):
+    if not other:
+      return False
+    return tuple(self.keys()) >= tuple(other.keys())
 
   # TODO(Tom): According to
   # http://docs.python.org/reference/datamodel.html#object.__hash__

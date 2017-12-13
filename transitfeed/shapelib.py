@@ -53,14 +53,43 @@ class Point(object):
     self.y = y
     self.z = z
 
+  @classmethod
+  def _ensure_instance(cls, other):
+    if not isinstance(other, cls):
+      raise TypeError('Point.__cmp__(x,y) requires y to be a "Point", '
+                      'not a "%s"' % type(other).__name__)
+
   def __hash__(self):
     return hash((self.x, self.y, self.z))
 
   def __cmp__(self, other):
-    if not isinstance(other, Point):
-      raise TypeError('Point.__cmp__(x,y) requires y to be a "Point", '
-                      'not a "%s"' % type(other).__name__)
-    return cmp((self.x, self.y, self.z), (other.x, other.y, other.z))
+    self._ensure_instance(other)
+    self_tuple = (self.x, self.y, self.z)
+    other_tuple = (other.x, other.y, other.z)
+    return (self_tuple > other_tuple) - (self_tuple < other_tuple)
+
+  def __eq__(self, other):
+    self._ensure_instance(other)
+    return (self.x, self.y, self.z) == (other.x, other.y, other.z)
+
+  def __ne__(self, other):
+    return not self.__eq__(other)
+
+  def __lt__(self, other):
+    self._ensure_instance(other)
+    return (self.x, self.y, self.z) < (other.x, other.y, other.z)
+
+  def __le__(self, other):
+    self._ensure_instance(other)
+    return (self.x, self.y, self.z) <= (other.x, other.y, other.z)
+
+  def __gt__(self, other):
+    self._ensure_instance(other)
+    return (self.x, self.y, self.z) > (other.x, other.y, other.z)
+
+  def __ge__(self, other):
+    self._ensure_instance(other)
+    return (self.x, self.y, self.z) >= (other.x, other.y, other.z)
 
   def __str__(self):
     return "(%.15f, %.15f, %.15f) " % (self.x, self.y, self.z)

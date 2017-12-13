@@ -174,6 +174,24 @@ class TestSchemedMerge(util.TestCase):
       def __cmp__(self, b):
         return 0
 
+      def __eq__(self, b):
+        return True
+
+      def __ne__(self, b):
+        return False
+
+      def __lt__(self, b):
+        return False
+
+      def __le__(self, b):
+        return True
+
+      def __gt__(self, b):
+        return False
+
+      def __ge__(self, b):
+        return True
+
     x = 99
     a = TestAttrib()
     b = TestAttrib()

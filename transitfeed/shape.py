@@ -97,6 +97,9 @@ class Shape(GtfsFactoryUser):
   def ClearPoints(self):
     self.points = []
 
+  def __hash__(self):
+    return hash(tuple(self.points))
+
   def __eq__(self, other):
     if not other:
       return False
