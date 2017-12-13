@@ -16,6 +16,7 @@
 
 """Tests for transitfeed.shapelib.py"""
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 __author__ = 'chris.harrelson.code@gmail.com (Chris Harrelson)'
 

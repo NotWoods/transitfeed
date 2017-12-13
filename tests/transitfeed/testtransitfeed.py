@@ -16,6 +16,7 @@
 
 # Unit tests for the transitfeed module.
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import transitfeed
 import unittest

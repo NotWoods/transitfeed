@@ -14,6 +14,7 @@
 
 # Unit tests for the shapepoint module.
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 from tests import util
 import transitfeed

@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import unicode_literals
+
 import bisect
 from transitfeed.gtfsobjectbase import GtfsObjectBase
 import transitfeed.problems as problems_module

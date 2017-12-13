@@ -17,6 +17,7 @@
 """Unit tests for the kmlwriter module."""
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 import os
 from six import StringIO
 import tempfile

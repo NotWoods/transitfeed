@@ -21,6 +21,8 @@ Requires the ogr python package.
 
 __author__ = 'chris.harrelson.code@gmail.com (Chris Harrelson)'
 
+from __future__ import unicode_literals
+
 import csv
 import glob
 import ogr

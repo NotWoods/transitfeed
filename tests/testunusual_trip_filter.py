@@ -16,6 +16,7 @@
 
 """Tests for unusual_trip_filter.py"""
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 __author__ = 'Jiri Semecky <jiri.semecky@gmail.com>'
 

@@ -14,6 +14,7 @@
 
 # Unit tests for the serviceperiod module.
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import datetime
 from datetime import date

@@ -23,6 +23,8 @@ https://github.com/google/transitfeed/wiki/BuildingPythonWindowsExecutables
 for help on creating Windows executables.
 """
 
+from __future__ import unicode_literals
+
 from distutils.core import setup
 import glob
 import os.path

@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import unicode_literals
+
 """A library for manipulating points and polylines.
 
 This is a library for creating and manipulating points on the unit

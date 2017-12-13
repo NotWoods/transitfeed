@@ -17,6 +17,7 @@
 """Extension of feedvalidator.py using the googletransit extension by default.
 """
 
+from __future__ import unicode_literals
 import extensions.googletransit  # needed for py2exe
 import feedvalidator
 from transitfeed import util

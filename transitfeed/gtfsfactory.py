@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import unicode_literals
 from transitfeed.agency import Agency
 from transitfeed.fareattribute import FareAttribute
 from transitfeed.farerule import FareRule
@@ -72,7 +73,7 @@ class GtfsFactory(object):
         'fare_rules.txt': { 'required': False, 'loading_order': 60,
                             'classes': ['FareRule']},
 
-        'feed_info.txt': { 'required': False, 'loading_order': 100, 
+        'feed_info.txt': { 'required': False, 'loading_order': 100,
                            'classes': ['FeedInfo']},
 
         'frequencies.txt': { 'required': False, 'loading_order': 70,

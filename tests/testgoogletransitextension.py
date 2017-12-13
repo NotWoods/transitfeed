@@ -17,6 +17,7 @@
 # Unit tests for the googletransit extension (extensions.googletransit)
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 import extensions.googletransit
 
 import os

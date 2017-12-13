@@ -20,6 +20,7 @@
 For usage information run feedvalidator.py --help
 """
 
+from __future__ import unicode_literals
 import bisect
 import codecs
 import datetime
@@ -377,7 +378,7 @@ class HTMLCountingProblemAccumulator(LimitPerTypeProblemAccumulator):
       summary = '<span class="pass">feed validated successfully</span>'
 
     if self.HasNotices():
-      summary = ('<h3 class="issueHeader">Notices:</h3>' + 
+      summary = ('<h3 class="issueHeader">Notices:</h3>' +
           self.FormatType("Notice", self.ProblemListMap(TYPE_NOTICE).items()) +
           summary)
 

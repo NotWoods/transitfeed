@@ -16,6 +16,7 @@
 
 """Unit tests for the merge module."""
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 __author__ = 'timothy.stranex@gmail.com (Timothy Stranex)'
 

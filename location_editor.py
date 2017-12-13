@@ -22,6 +22,8 @@
 # Usage:
 # location_editor.py --key `cat key` --port 8765 --feed_filename feed.zip
 
+from __future__ import unicode_literals
+
 import schedule_viewer
 import transitfeed
 

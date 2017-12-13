@@ -38,6 +38,7 @@ Run merge.py --help for a list of the possible options.
 """
 
 from __future__ import print_function
+from __future__ import unicode_literals
 
 __author__ = 'timothy.stranex@gmail.com (Timothy Stranex)'
 
@@ -341,13 +342,13 @@ Generated using transitfeed version %s on %s.
 </html>""" % (transitfeed.__version__,
               time.strftime('%B %d, %Y at %I:%M %p %Z'))
 
-    output_file.write(transitfeed.EncodeUnicode(html_header))
-    output_file.write(transitfeed.EncodeUnicode(html_stats))
-    output_file.write(transitfeed.EncodeUnicode(html_summary))
-    output_file.write(transitfeed.EncodeUnicode(html_notices))
-    output_file.write(transitfeed.EncodeUnicode(html_errors))
-    output_file.write(transitfeed.EncodeUnicode(html_warnings))
-    output_file.write(transitfeed.EncodeUnicode(html_footer))
+    output_file.write(html_header)
+    output_file.write(html_stats)
+    output_file.write(html_summary)
+    output_file.write(html_notices)
+    output_file.write(html_errors)
+    output_file.write(html_warnings)
+    output_file.write(html_footer)
 
 
 def LoadWithoutErrors(path, memory_db):
@@ -1858,7 +1859,7 @@ https://github.com/google/transitfeed/wiki/Merge
   else:
     merged_feed_path = None
 
-  output_file = file(options.html_output_path, 'w')
+  output_file = open(options.html_output_path, 'w')
   accumulator.WriteOutput(output_file, feed_merger,
                           old_feed_path, new_feed_path, merged_feed_path)
   output_file.close()

@@ -16,6 +16,8 @@
 
 # Unit tests for transitfeed/util.py
 
+from __future__ import unicode_literals
+
 try:
     import mock
 except ImportError:

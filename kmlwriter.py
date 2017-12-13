@@ -69,6 +69,7 @@ in a folder hierarchy which looks like this at the top level:
     - Shapes
 """
 from __future__ import print_function
+from __future__ import unicode_literals
 
 try:
   import xml.etree.ElementTree as ET  # python 2.5
@@ -791,7 +792,7 @@ https://github.com/google/transitfeed/wiki/KMLWriter
   try:
     loader = transitfeed.Loader(input_path)
     feed = loader.Load()
-  except transitfeed.ExceptionWithContext, e:
+  except transitfeed.ExceptionWithContext as e:
     print((
         "\n\nGTFS feed must load without any errors.\n"
         "While loading %s the following error was found:\n%s\n%s\n" %

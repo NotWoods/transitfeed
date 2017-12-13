@@ -21,6 +21,8 @@ Filters out trips which are not on the defualt routes and
 For usage information run unusual_trip_filter.py --help
 """
 
+from __future__ import unicode_literals
+
 __author__ = 'Jiri Semecky <jiri.semecky@gmail.com>'
 
 import codecs

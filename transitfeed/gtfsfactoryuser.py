@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import unicode_literals
+
 class GtfsFactoryUser(object):
   """Base class for objects that must store a GtfsFactory in order to
      be able to instantiate Gtfs classes.

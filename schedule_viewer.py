@@ -20,6 +20,7 @@ An example application that uses the transitfeed module.
 You must provide a Google Maps API key.
 """
 
+from __future__ import unicode_literals
 
 import BaseHTTPServer, sys, urlparse
 import bisect

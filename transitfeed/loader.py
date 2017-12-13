@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import unicode_literals
+
 import codecs
 import csv
 import os
@@ -397,7 +399,7 @@ class Loader:
         return None
     else:
       try:
-        data_file = open(os.path.join(self._path, file_name), 'rb')
+        data_file = open(os.path.join(self._path, file_name), 'r')
         results = data_file.read()
       except IOError:  # file not found
         self._problems.MissingFile(file_name)

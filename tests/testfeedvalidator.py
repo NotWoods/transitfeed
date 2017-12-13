@@ -18,6 +18,7 @@
 # for a valid feed and a feed with errors.
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 import datetime
 import feedvalidator
 import os.path
