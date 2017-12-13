@@ -21,7 +21,7 @@ to Google Transit format."""
 # motivation to port it. Please see the examples directory for better
 # examples.
 
-import cStringIO
+from io import BytesIO
 import csv
 import datetime
 import optparse
@@ -393,7 +393,7 @@ class DivaImporter:
                            ('trips.txt', self.WriteTrips),
                            ('stops.txt', self.WriteStations),
                            ('stop_times.txt', self.WriteStopTimes)]:
-      s = cStringIO.StringIO()
+      s = BytesIO()
       func(s)
       out.writestr(filename, s.getvalue())
     out.close()

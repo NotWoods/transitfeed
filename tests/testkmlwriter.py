@@ -18,7 +18,7 @@
 
 from __future__ import absolute_import
 import os
-from io import StringIO
+from six import StringIO
 import tempfile
 import unittest
 import kmlparser

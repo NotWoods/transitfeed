@@ -742,12 +742,12 @@ class TooFastTravel(ExceptionWithContext):
     if not d:
       d = self.GetDictToFormat()
     if not d['speed']:
-      return b"High speed travel detected in trip {trip_id}: {prev_stop}" \
-             b" to {next_stop}. {dist} meters in {time} seconds.".format(**d)
+      return "High speed travel detected in trip {trip_id}: {prev_stop}" \
+             " to {next_stop}. {dist} meters in {time} seconds.".format(**d)
     else:
-      return b"High speed travel detected in trip {trip_id}: {prev_stop}" \
-             b" to {next_stop}. {dist} meters in {time} seconds." \
-             b" ({speed} km/h).".format(**d)
+      return "High speed travel detected in trip {trip_id}: {prev_stop}" \
+             " to {next_stop}. {dist} meters in {time} seconds." \
+             " ({speed} km/h).".format(**d)
   def __cmp__(self, y):
     # Sort in decreasing order because more distance is more significant. We
     # can't sort by speed because not all TooFastTravel objects have a speed.

@@ -22,7 +22,8 @@ __author__ = 'timothy.stranex@gmail.com (Timothy Stranex)'
 import merge
 import os.path
 import re
-from io import StringIO
+from six import StringIO
+from six import BytesIO
 from tests import util
 import transitfeed
 import unittest
@@ -593,7 +594,10 @@ class TestAgencyMerger(util.TestCase):
     # Force a1.agency_id to be unicode to make sure it is correctly encoded
     # to utf-8 before concatinating to the agency_name containing non-ascii
     # characters.
-    self.a1.agency_id = unicode(self.a1.agency_id)
+    try:
+      self.a1.agency_id = unicode(self.a1.agency_id)
+    except NameError:
+      self.a1.agency_id = str(self.a1.agency_id)
     self.a2.agency_id = str(self.a1.agency_id)
     self.a2.agency_name = 'different \xc3\xa9'
     self.fm.a_schedule.AddAgencyObject(self.a1)
@@ -1496,7 +1500,7 @@ class TestHTMLProblemAccumulator(util.TestCase):
 class MergeInSubprocessTestCase(util.TempDirTestCaseBase):
   def CopyAndModifyTestData(self, zip_path, modify_file, old, new):
     """Return path of zip_path copy with old replaced by new in modify_file."""
-    zipfile_mem = StringIO(open(zip_path, 'rb').read())
+    zipfile_mem = BytesIO(open(zip_path, 'rb').read())
     old_zip = zipfile.ZipFile(zipfile_mem, 'r')
 
     content_dict = self.ConvertZipToDict(old_zip)
@@ -1530,7 +1534,7 @@ class MergeInSubprocessTestCase(util.TempDirTestCaseBase):
     # free so it can't start in the future.
     future_good_feed = self.CopyAndModifyTestData(
         self.GetPath('tests/data/good_feed.zip'), 'calendar.txt',
-        '20070101', '20110101')
+        b'20070101', b'20110101')
     (out, err) = self.CheckCallWithPath(
         [self.GetPath('merge.py'), '--no_browser',
          self.GetPath('tests/data/unused_stop'),
@@ -1544,7 +1548,7 @@ class MergeInSubprocessTestCase(util.TempDirTestCaseBase):
     # free so it can't start in the future.
     future_good_feed = self.CopyAndModifyTestData(
         self.GetPath('tests/data/good_feed.zip'), 'calendar.txt',
-        '20070101', '20110101')
+        b'20070101', b'20110101')
     (out, err) = self.CheckCallWithPath(
         [self.GetPath('merge.py'), '--no_browser',
          self.GetPath('tests/data/unused_stop'),
@@ -1555,7 +1559,7 @@ class MergeInSubprocessTestCase(util.TempDirTestCaseBase):
   def testCheckVersionIsRun(self):
     future_good_feed = self.CopyAndModifyTestData(
         self.GetPath('tests/data/good_feed.zip'), 'calendar.txt',
-        '20070101', '20110101')
+        b'20070101', b'20110101')
     (out, err) = self.CheckCallWithPath(
         [self.GetPath('merge.py'), '--no_browser',
          '--latest_version', '100.100.100',

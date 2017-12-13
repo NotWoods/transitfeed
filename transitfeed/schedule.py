@@ -210,7 +210,7 @@ class Schedule(object):
 
   def GetAgencyList(self):
     """Returns the list of Agency objects known to this Schedule."""
-    return self._agencies.values()
+    return list(self._agencies.values())
 
   def GetServicePeriod(self, service_id):
     """Returns the ServicePeriod object with the given ID."""
@@ -373,7 +373,7 @@ class Schedule(object):
       self.fare_zones[stop.zone_id] = True
 
   def GetStopList(self):
-    return self.stops.values()
+    return list(self.stops.values())
 
   def AddRoute(self, short_name, long_name, route_type, route_id=None):
     """Add a route to this schedule.

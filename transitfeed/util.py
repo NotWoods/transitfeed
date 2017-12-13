@@ -557,9 +557,9 @@ class CsvUnicodeWriter:
     utf-8."""
     encoded_row = []
     for s in row:
-      if isinstance(s, unicode):
+      try:
         encoded_row.append(s.encode("utf-8"))
-      else:
+      except AttributeError:
         encoded_row.append(s)
     try:
       self.writer.writerow(encoded_row)
@@ -641,7 +641,7 @@ class EndOfLineChecker:
         pass
     else:
       self._problems.InvalidLineEnd(
-        codecs.getencoder('string_escape')(m_eol.group())[0],
+        codecs.getencoder('unicode_escape')(m_eol.group())[0],
         (self._name, self._line_number))
     next_line_contents = next_line[0:m_eol.start()]
     for seq, name in INVALID_LINE_SEPARATOR_UTF8.items():

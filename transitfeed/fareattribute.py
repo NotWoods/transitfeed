@@ -80,6 +80,11 @@ class FareAttribute(GtfsObjectBase):
   def __getitem__(self, name):
     return getattr(self, name)
 
+  def __hash__(self):
+    field_values_tuple = tuple(self.GetFieldValuesTuple())
+    self_rules = tuple(sorted(r.GetFieldValuesTuple() for r in self.GetFareRuleList()))
+    return hash(field_values_tuple) + hash(self_rules)
+
   def __eq__(self, other):
     if not other:
       return False

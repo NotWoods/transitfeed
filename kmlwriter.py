@@ -72,7 +72,7 @@ from __future__ import print_function
 
 try:
   import xml.etree.ElementTree as ET  # python 2.5
-except ImportError, e:
+except ImportError:
   import elementtree.ElementTree as ET  # older pythons
 import extensions.googletransit as googletransit
 import optparse
@@ -799,7 +799,7 @@ https://github.com/google/transitfeed/wiki/KMLWriter
          e.FormatContext(),
          transitfeed.EncodeUnicode(e.FormatProblem()))), file=sys.stderr)
     sys.exit(1)
-                         
+
   print("Writing %s" % output_path)
   writer = KMLWriter()
   writer.show_trips = options.show_trips
