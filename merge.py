@@ -1201,7 +1201,7 @@ class ServicePeriodMerger(DataSetMerger):
     before = (cutoff_date - one_day_delta).strftime('%Y%m%d')
 
     for a in self.feed_merger.a_schedule.GetServicePeriodList():
-      TruncatePeriod(a, 0, before)
+      TruncatePeriod(a, '0'*8, before)
     for b in self.feed_merger.b_schedule.GetServicePeriodList():
       TruncatePeriod(b, cutoff, '9'*8)
 

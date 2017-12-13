@@ -416,7 +416,7 @@ class Schedule(object):
     self.routes[route.route_id] = route
 
   def GetRouteList(self):
-    return self.routes.values()
+    return list(self.routes.values())
 
   def GetRoute(self, route_id):
     return self.routes[route_id]
@@ -1246,7 +1246,7 @@ class Schedule(object):
             # If the serivce_id_pair_key is not in the cache, we do the
             # full service period comparison
             if service_id_pair_key not in service_period_overlap_cache:
-              
+
               # If the trip references an unknown service id, then we bail,
               # since we can't effectively determine block overlap and an
               # error will have already been registered for the missing
