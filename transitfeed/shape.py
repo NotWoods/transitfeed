@@ -85,7 +85,7 @@ class Shape(GtfsFactoryUser):
                               'the previous ones. In this case, the previous '
                               'distance was %f.' % self.distance[index - 1])
 
-    if shapepoint.shape_dist_traveled > self.max_distance:
+    if shapepoint.shape_dist_traveled is not None and shapepoint.shape_dist_traveled > self.max_distance:
       self.max_distance = shapepoint.shape_dist_traveled
 
     self.sequence.insert(index, shapepoint.shape_pt_sequence)

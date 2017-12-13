@@ -57,7 +57,7 @@ class ShapeLibTestBase(util.TestCase):
     except AssertionError:
       print("ERROR: %s != %s" % (formatPoints(points1), formatPoints(points2)))
       raise
-    for i in xrange(len(points1)):
+    for i in range(len(points1)):
       try:
         self.assertPointApproxEq(points1[i], points2[i])
       except AssertionError:

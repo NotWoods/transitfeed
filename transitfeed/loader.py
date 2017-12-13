@@ -130,7 +130,7 @@ class Loader:
       # Convert and continue, so we can find more errors
       contents = codecs.getdecoder('utf-16')(contents)[0].encode('utf-8')
 
-    null_index = contents.find('\0')
+    null_index = contents.find(b'\0')
     if null_index != -1:
       # It is easier to get some surrounding text than calculate the exact
       # row_num
@@ -262,6 +262,8 @@ class Loader:
           valid_values.append(codecs.getdecoder("utf8")
                               (raw_row[i], errors="replace")[0])
           unicode_error_columns.append(len(valid_values) - 1)
+        except AttributeError:
+          valid_values.append(raw_row[i])
         except IndexError:
           break
 
@@ -367,6 +369,8 @@ class Loader:
               result[i] = codecs.getdecoder("utf8")(row[ci],
                                                     errors="replace")[0].strip()
               unicode_error_columns.append(i)
+            except AttributeError:
+              result[i] = row[ci].strip()
 
       for i in unicode_error_columns:
         self._problems.InvalidValue(cols[i], result[i],

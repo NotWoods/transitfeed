@@ -616,7 +616,7 @@ class EndOfLineChecker:
   def next(self):
     """Return next line without end of line marker or raise StopIteration."""
     try:
-      next_line = next(self._f)
+      next_line = next(self._f).decode('utf-8')
     except StopIteration:
       self._FinalCheck()
       raise

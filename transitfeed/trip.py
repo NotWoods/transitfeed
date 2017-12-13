@@ -465,7 +465,7 @@ class Trip(GtfsObjectBase):
                                     'should be greater than start_time')
 
     if not exact_times:
-      exact_times = 0      
+      exact_times = 0
     if exact_times not in (0, 1):
       problem_reporter.InvalidValue('exact_times', exact_times,
           'Should be 0 (no fixed schedule) or 1 (fixed and regular schedule)')
@@ -616,7 +616,7 @@ class Trip(GtfsObjectBase):
         # always larger than None.
         distance = timepoint.shape_dist_traveled
         if distance is not None:
-          if distance > prev_distance and distance >= 0:
+          if distance > (prev_distance or 0) and distance >= 0:
             prev_distance = distance
           else:
             if distance == prev_distance:
